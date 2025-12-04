@@ -1,0 +1,21 @@
+{
+  "name": "coding-interview-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config=tests/jest.config.js",
+    "build": "npm run build --workspace=frontend",
+    "start": "npm start --workspace=backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^10.1.0",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}
