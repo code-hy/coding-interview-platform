@@ -18,7 +18,7 @@ if (!fs.existsSync(TEMP_DIR)) {
     fs.mkdirSync(TEMP_DIR);
 }
 
-const TIMEOUT = 5000; // 5 seconds execution timeout
+const TIMEOUT = 15000; // 15 seconds execution timeout (increased for cloud environments)
 
 export const executeCode = async (language, code) => {
     const jobId = Math.random().toString(36).substr(2, 9);
