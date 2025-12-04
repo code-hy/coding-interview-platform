@@ -294,3 +294,22 @@ docker-compose up
 2. ✅ Run `docker-compose up --build`
 3. ✅ Test at http://localhost:5000
 4. ✅ Deploy to cloud platform (Render, Railway, etc.)
+
+---
+
+## CI/CD Pipeline (GitHub Actions)
+
+This project includes a pre-configured GitHub Actions workflow (`.github/workflows/ci.yml`) that automatically runs on every push to `main`.
+
+### What it does:
+1. **Test Backend**: Runs `npm test` in the `backend/` directory to ensure API reliability.
+2. **Docker Build**: Verifies that `docker-compose build` succeeds, ensuring the container is always deployable.
+
+### How to use:
+1. **Push to GitHub**:
+   ```bash
+   git remote add origin <your-github-repo-url>
+   git push -u origin main
+   ```
+2. **Check Actions Tab**: Go to your repository on GitHub -> Actions tab to see the build status.
+
