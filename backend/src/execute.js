@@ -79,11 +79,17 @@ public class Main {
 
             case 'go':
                 filePath = path.join(TEMP_DIR, `${filename}.go`);
+                const goBinary = path.join(TEMP_DIR, `${filename}`);
                 await writeFileAsync(filePath, code);
 
-                // Go run compiles and runs in one step (slower but easier)
-                const goResult = await execAsync(`go run "${filePath}"`, { timeout: TIMEOUT });
+                // Compile first (faster with explicit output)
+                await execAsync(`go build -o "${goBinary}" "${filePath}"`, { timeout: 30000 });
+                // Then execute the binary
+                const goResult = await execAsync(`"${goBinary}"`, { timeout: 15000 });
                 output = goResult.stdout || goResult.stderr;
+
+                // Cleanup binary
+                try { await unlinkAsync(goBinary); } catch (e) { }
                 break;
 
             default:
